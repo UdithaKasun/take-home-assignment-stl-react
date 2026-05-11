@@ -148,7 +148,142 @@ Each team's pipeline:
     7. Invalidate `remoteEntry.js` on CDN edge
     8. Update `config.js` to point to the new version
 
-**1.8 BFF - Backend for Frontend**
+**1.8 Sample folder structure for mono repo**
+
+```
+dashboard-monorepo/
+├── apps/
+│   ├── shell/
+│   │   ├── src/
+│   │   │   ├── main.tsx
+│   │   │   ├── routes.tsx
+│   │   │   ├── AppShell.tsx
+│   │   │   ├── components/
+│   │   │   │   ├── MFEErrorBoundary.tsx
+│   │   │   │   └── MFESkeleton.tsx
+│   │   │   ├── lib/
+│   │   │   │   └── loadRemote.ts
+│   │   │   └── types/
+│   │   │       └── remotes.d.ts
+│   │   ├── public/
+│   │   │   └── config.js
+│   │   ├── webpack.config.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   ├── analytics/
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   ├── routes.tsx
+│   │   │   ├── pages/
+│   │   │   └── components/
+│   │   ├── webpack.config.ts
+│   │   ├── jest.config.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── Dockerfile
+│   ├── billing/
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   ├── routes.tsx
+│   │   │   ├── pages/
+│   │   │   └── components/
+│   │   ├── webpack.config.ts
+│   │   ├── jest.config.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── Dockerfile
+│   ├── settings/
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   ├── routes.tsx
+│   │   │   ├── pages/
+│   │   │   └── components/
+│   │   ├── webpack.config.ts
+│   │   ├── jest.config.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── Dockerfile
+│   └── home/
+│       ├── src/
+│       │   ├── index.ts
+│       │   ├── routes.tsx
+│       │   ├── pages/
+│       │   └── components/
+│       ├── webpack.config.ts
+│       ├── jest.config.ts
+│       ├── package.json
+│       ├── tsconfig.json
+│       └── Dockerfile
+│
+├── packages/
+│   ├── ui/
+│   │   ├── src/
+│   │   │   ├── Button/
+│   │   │   ├── Input/
+│   │   │   ├── Modal/
+│   │   │   └── index.ts
+│   │   ├── tokens/
+│   │   │   ├── colors.ts
+│   │   │   ├── spacing.ts
+│   │   │   └── typography.ts
+│   │   ├── codemods/
+│   │   │   └── button-type-to-variant.ts
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── CHANGELOG.md
+│   ├── auth/
+│   │   ├── src/
+│   │   │   ├── useAuth.ts
+│   │   │   ├── getToken.ts
+│   │   │   └── AuthProvider.tsx
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   ├── analytics-sdk/
+│   │   ├── src/
+│   │   │   ├── track.ts
+│   │   │   └── events.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   ├── utils/
+│   │   ├── src/
+│   │   │   ├── formatters/
+│   │   │   ├── hooks/
+│   │   │   └── types/
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   ├── eslint-config/
+│   │   ├── index.js
+│   │   └── package.json
+│   └── tsconfig/
+│       ├── base.json
+│       └── package.json
+│
+├── infra/
+│   └── .github/
+│       └── workflows/
+│           ├── shell.yml
+│           ├── mfe-analytics.yml
+│           ├── mfe-billing.yml
+│           ├── mfe-settings.yml
+│           ├── mfe-home.yml
+│           └── packages.yml
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── OPERATIONAL.md
+│   └── RISKS.md
+│
+├── nx.json
+├── pnpm-workspace.yaml
+├── package.json
+├── tsconfig.base.json
+├── .eslintrc.base.js
+├── .gitignore
+├── CODEOWNERS
+└── README.md
+```
+
+**1.9 BFF - Backend for Frontend**
 
 A single Node.js BFF acts as the only backend the browser ever talks to. All requests from all four MFEs go through it. It has two layers:
 
