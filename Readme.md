@@ -10,6 +10,8 @@
 - CDN (e.g. CloudFront or Cloudflare) is available with edge caching support.
 - The monorepo toolchain is Nx for affected builds and task caching.
 
+[View Assigment Answers](./AssignmentAnswers.md)
+
 ---
 
 ### Time spent
