@@ -124,7 +124,7 @@ The shell owns the login flow. The JWT access token lives inside the `@company/a
 - API requests use `Authorization: Bearer` header only - no cookie sent to APIs
 - All requests validated at the BFF auth middleware before reaching any microservice
 
-**1.6 Key properties of the architecture**
+**1.7 Key properties of the architecture**
 
 - **No team blocks another** - each team deploys their MFE independently. A broken billing deploy does not affect analytics.
 - **Auth is a chokepoint by design** - there is one place where JWT validation happens. No MFE has a path to a microservice that bypasses it.
@@ -133,7 +133,7 @@ The shell owns the login flow. The JWT access token lives inside the `@company/a
 - **Rollback is fast** - because `remoteEntry.js` is versioned on the CDN and the shell resolves URLs from `config.js`, rolling back any MFE is a config change with no code deployment.
 - **UI consistency is a contract not a runtime dependency** - the design system is versioned npm. Visual regression CI gates catch drift before it reaches production.
 
-**1.7 Independent build, test and deploy**
+**1.8 Independent build, test and deploy**
 
 Each MFE has its own CI pipeline triggered by path filters in the monorepo. A change in `mfes/billing/**` only triggers the billing pipeline. The shell deploys separately.
 
@@ -148,7 +148,7 @@ Each team's pipeline:
     7. Invalidate `remoteEntry.js` on CDN edge
     8. Update `config.js` to point to the new version
 
-**1.8 Sample folder structure for mono repo**
+**1.9 Sample folder structure for mono repo**
 
 ```
 dashboard-monorepo/
@@ -283,7 +283,7 @@ dashboard-monorepo/
 └── README.md
 ```
 
-**1.9 BFF - Backend for Frontend**
+**1.10 BFF - Backend for Frontend**
 
 A single Node.js BFF acts as the only backend the browser ever talks to. All requests from all four MFEs go through it. It has two layers:
 
